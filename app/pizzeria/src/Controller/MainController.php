@@ -7,15 +7,12 @@ use App\Form\Type\PizzaType;
 use App\Repository\PizzaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends AbstractController
 {
-
-
     private EntityManagerInterface $em;
     private PizzaRepository $pizzaRepository;
 
@@ -27,12 +24,10 @@ class MainController extends AbstractController
     }
 
 
-
     #[Route('/', name: 'list_pizza')]
     public function pizzaList()
     {
         $pizzas = $this->pizzaRepository->findAll();
-
 
         return $this->render('list_pizza.html.twig', [
             'pizzas' => $pizzas,
@@ -43,9 +38,7 @@ class MainController extends AbstractController
     #[Route('/modification-pizza/{id}', name: 'edit_pizza')]
     public function editPizza(Request $request, Pizza $pizza)
     {
-
         $form = $this->createForm(PizzaType::class, $pizza);
-
 
         $form->handleRequest($request);
 
@@ -64,7 +57,6 @@ class MainController extends AbstractController
         $pizza = new Pizza();
         $form = $this->createForm(PizzaType::class, $pizza);
 
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -79,7 +71,6 @@ class MainController extends AbstractController
     #[Route('/supprimer-pizza/{id}', name: 'delete_pizza')]
     public function deletePizza(Pizza $pizza)
     {
-
         $this->em->remove($pizza);
         $this->em->flush();
         $pizzas = $this->pizzaRepository->findAll();
