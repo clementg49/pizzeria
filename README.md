@@ -1,4 +1,4 @@
-** d'installation:**
+** Installation:**
 
 - git clone https://github.com/clementg49/pizzeria.git
 - cd pizzeria
