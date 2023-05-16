@@ -1,15 +1,13 @@
-Commande d'installation:
-git clone https://github.com/clementg49/pizzeria.git
-cd pizzeria
-docker-compose up
-docker exec -it pizzeria_php-apache-1 bash
-cd pizzeria
-make install
+** d'installation:**
 
+- git clone https://github.com/clementg49/pizzeria.git
+- cd pizzeria
+- docker-compose up
+- docker exec -it pizzeria_php-apache-1 bash
+- cd pizzeria
+- make install
 
-
-
-Context:
+**Context:**
 
 L’application va permettre aux utilisateurs de gérer un petit catalogue de pizza ainsi que les
 ingrédients nécessaires à leur cuisson. En outre, l’utilisateur doit pouvoir ajouter ou
