@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pizzeria!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+{% block body %}
+    {{ include('/cards_pizza.html.twig') }}
+
+
+
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('list_pizza') }}
+{% endblock %}

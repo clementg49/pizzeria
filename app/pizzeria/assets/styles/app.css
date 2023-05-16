@@ -1,0 +1,19 @@
+@import '~bootstrap';
+
+body {
+    background-color: lightgray;
+}
+
+
+.form-check {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+
+.del-pizza {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 5px 5px 0 0;
+}

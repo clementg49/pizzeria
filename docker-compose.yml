@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+    php-apache:
+        ports:
+            - "8003:80"
+        build: './build/php'
+        restart: always
+        volumes:
+            - ./app:/var/www
+    mysql:
+        ports:
+            - "9906:3306"
+        build: './build/mysql'
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: "pizzeria-pwd"
+            MYSQL_DATABASE: "pizzeria-db"
+
