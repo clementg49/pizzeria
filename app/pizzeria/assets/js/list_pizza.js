@@ -1,5 +1,5 @@
 $(function () {
-  $(".btn-close").on("click", function () {
+  $(document).on("click", '.btn-close', function () {
     $.ajax({
       url: `/supprimer-pizza/${$(this).data('id')}`,
       type: 'POST',
