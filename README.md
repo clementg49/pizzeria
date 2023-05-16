@@ -6,6 +6,7 @@
 - docker exec -it pizzeria_php-apache-1 bash
 - cd pizzeria
 - make install
+- accéder sur localhost:8003
 
 **Context:**
 
