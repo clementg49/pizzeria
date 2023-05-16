@@ -4,7 +4,6 @@ services:
         ports:
             - "8003:80"
         build: './build/php'
-        restart: always
         volumes:
             - ./app:/var/www
     mysql:
