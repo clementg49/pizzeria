@@ -19,68 +19,47 @@ PORT ?= 8001
 # ============================================================================ #
 #                                    Symfony                                   #
 # ============================================================================ #
-composer.lock: composer.json
+composer.lock:
 	$(COMPOSER) update
 
-vendor: composer.lock
+vendor:
 ifeq ($(APP_ENV),prod)
 	$(COMPOSER) install --no-dev --optimize-autoloader
 else
 	$(COMPOSER) install
 endif
 
-package-lock: package.json
+package-lock:
 	$(NPM) update
 	$(NPM) audit fix
 
-node_modules: package-lock.json
+node_modules:
 	$(NPM) install
 	$(NPM) audit fix
 
-npm: package-lock.json
+npm_build:
 	$(NPM) run build
 
-install: .env  vendor composer.json   package-lock.json  migrate fixture npm## Install project dependencies
+install:  vendor   node_modules   npm_build  migrate fixture ## Install project dependencies
 
-update: composer.json package.json ## Update project dependencies
-ifeq ($(APP_ENV),prod)
-	$(COMPOSER) update --no-dev --optimize-autoloader
-else
-	$(COMPOSER) update
-endif
-
-#	$(NPM) update
-#	$(NPM) audit fix
-
-db: .env  vendor  ## Create database
+db: ## Create database
 	$(SF) doctrine:database:create
 
-migration: vendor ## Generate a new migration file
+migration:  ## Generate a new migration file
 	$(SF) doctrine:migrations:diff
 
-migrate: vendor ## Migrate database
+migrate:  ## Migrate database
 	$(SF) doctrine:migrations:migrate --no-interaction
 
 fixture:   ## Load fixtures
 	$(SF) doctrine:fixtures:load --append
 
-reset-db: .env  vendor
+reset-db:
 	$(SF) doctrine:database:drop --force
 	$(SF) doctrine:database:create
 	$(SF) doctrine:migrations:migrate --no-interaction;
 
-watch: node_modules ## Watch files
-	$(NPM) run watch
 
-clear:
-ifneq ($(FCGI),/path/fpm.sock)
-	php vendor/bin/cachetool opcache:reset --fcgi=$(FCGI)
-endif
-	php bin/console cache:pool:clear cache.global_clearer
-	php bin/console cache:clear
-ifeq ($(APP_ENV),prod)
-	chown -R www-data:www-data var/cache/prod
-endif
 
 help:
 	@grep -h -E '^[a-zA-Z_-]+:.*?##:q .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
