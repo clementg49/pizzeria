@@ -3,7 +3,7 @@
 - git clone https://github.com/clementg49/pizzeria.git
 - cd pizzeria
 - docker-compose up
-- docker exec -it pizzeria_php-apache-1 bash
+- docker exec -it pizzeria-php-apache-1 bash
 - cd pizzeria
 - make install
 - accéder sur localhost:8003
