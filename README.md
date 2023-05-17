@@ -5,6 +5,7 @@
 - docker-compose up
 - docker exec -it pizzeria-php-apache-1 bash
 - cd pizzeria
+- composer install 
 - make install
 - accéder sur localhost:8003
 
