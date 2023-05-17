@@ -5,13 +5,21 @@ services:
             - "8003:80"
         build: './build/php'
         volumes:
-            - ./app:/var/www
+            - ./app/pizzeria:/var/www/pizzeria:cached
+            - symfony_app_var:/var/www/pizzeria/var
+            - symfony_app_vendor:/var/www/pizzeria/vendor
     mysql:
         ports:
             - "9906:3306"
         build: './build/mysql'
+        volumes:
+            - db_app:/var/lib/mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: "pizzeria-pwd"
             MYSQL_DATABASE: "pizzeria-db"
 
+volumes:
+    symfony_app_var:
+    symfony_app_vendor:
+    db_app:
